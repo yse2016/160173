@@ -1,0 +1,4 @@
+Misuna,Bunka,H2
+Rouyama,Housou,C1
+Miki,Tosyo,H2
+Hurusu,Bika,H1
