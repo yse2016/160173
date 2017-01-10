@@ -19,21 +19,21 @@ class Alohaman{
 	}
 
 	public void sayAloha(){
-		System.out.println(msg);
+		System.out.println(this.msg);
 	}
 
 	public void sayAloha(int n){
 		for(int i = 0; i<n; i++){
-			System.out.println(msg);
+			System.out.println(this.msg);
 		}
 	}
 
 	public void sayAloha(int n, int x){
 		for(int i = 0; i<n; i++){
 			if(i%x == 0){
-				System.out.println(msg2);
+				System.out.println(this.msg2);
 			}else{
-				System.out.println(msg);
+				System.out.println(this.msg);
 			}
 		}
 	}
