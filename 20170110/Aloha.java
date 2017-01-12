@@ -1,9 +1,20 @@
 public class Aloha{
 	public static void main(String[] args){
 		Alohaman am = new Alohaman();
-		am.sayAloha();
-		am.sayAloha(20);
-		am.sayAloha(20,3);
+		int lon = args.length;
+
+		if(lon == 0){
+			am.sayAloha();
+		}else if(lon == 1){
+			int a = Integer.parseInt( args[0] );
+			am.sayAloha(a);
+		} else if(lon == 2){
+			int a = Integer.parseInt( args[0] );
+			int b = Integer.parseInt( args[1] );
+			am.sayAloha(a,b);
+		} else {
+			System.out.println("ERROR :受け付けられるデータは2個までです。");
+		}
 	}
 }
 
