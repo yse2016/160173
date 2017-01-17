@@ -19,6 +19,7 @@ class AlohaWindowMan implements ActionListener{
 	JTextArea area;
 	JScrollPane scrollPane;
 	String filedata;
+	String textdata;
 
 	// method
 	public AlohaWindowMan(){
@@ -78,14 +79,14 @@ class AlohaWindowMan implements ActionListener{
 		}else if(cmd.equals("save")){
 			// field.setText("Save clicked");
 			filedata = field.getText();
+			textdata = area.getText();
 			try {
 				File outFile				= new File(filedata);
 				FileWriter fw				= new FileWriter(outFile);
 				BufferedWriter bw 			= new BufferedWriter(fw);
 				PrintWriter pw				= new PrintWriter(bw);
 
-				String textdata = area.getText();
-				pw.setText(textdata);
+				pw.println(textdata);
 
 			} catch(IOException e){
 				System.out.println("error");

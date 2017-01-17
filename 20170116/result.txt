@@ -3,3 +3,5 @@ Mai,K2
 Matsuri,K2
 Uto,C1
 Suina,C3
+Yumi,C3
+
