@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Canvas</title>
+</head>
+<body>
+
+	<canvas id="canvas" width="800" height="800"></canvas>
+
+</body>
+<Script>
+	var canvas = document.getElementById('canvas');
+	var ctx = canvas.getContext('2d');
+	var x = 100;
+	var y= 50;
+
+	ctx.fillStyle = "rgba(0,0,0,0.5)";
+	ctx.fillRect(100,100,100,100);
+
+	ctx.fillRect(100,400,100,100);
+	ctx.strokeRect(150,310,100,100);
+	ctx.clearRect(125,125,50,50);
+
+	ctx.beginPath();
+	ctx.moveTo(75,50);
+	ctx.lineTo(100,75);
+	ctx.lineTo(100,25);
+	ctx.fill();
+
+	ctx.moveTo(112.5,10);
+	ctx.lineTo(125,25);
+	ctx.lineTo(100,25);
+	ctx.fill();
+
+	ctx.moveTo(112.5,90);
+	ctx.lineTo(125,75);
+	ctx.lineTo(100,75);
+	ctx.fill();
+
+	ctx.moveTo(150,50);
+	ctx.lineTo(125,75);
+	ctx.lineTo(125,25);
+	ctx.closePath();
+	ctx.stroke();
+
+
+	ctx.beginPath();
+	ctx.fillStyle = "rgb(255,0,0)";
+	ctx.globalAlpha = 0.5;
+	ctx.moveTo(125,125);
+	ctx.lineTo(125,150);
+	ctx.lineTo(150,125);
+	ctx.fill();
+	ctx.closePath();
+
+	ctx.beginPath();
+	ctx.globalAlpha = 0.5;
+	ctx.fillStyle = "rgb(0,255,0)";
+	ctx.moveTo(150,125);
+	ctx.lineTo(175,125);
+	ctx.lineTo(175,150);
+	ctx.fill();
+	ctx.closePath();
+
+	ctx.beginPath();
+	ctx.globalAlpha = 0.5;
+	ctx.fillStyle = "rgb(0,0,255)";
+	ctx.moveTo(125,150);
+	ctx.lineTo(125,175);
+	ctx.lineTo(150,175);
+	ctx.fill();
+	ctx.closePath();
+
+	ctx.beginPath();
+	ctx.globalAlpha = 0.5;
+	ctx.fillStyle = "rgb(255,255,0)";
+	ctx.moveTo(175,150);
+	ctx.lineTo(175,175);
+	ctx.lineTo(150,175);
+	ctx.fill();
+	ctx.closePath();
+
+	ctx.beginPath();
+	ctx.globalAlpha = 0.5;
+	ctx.fillStyle = "rgb(0,255,255)";
+	ctx.moveTo(400,400);
+	ctx.arc(400,400,100,0,Math.PI/2, true);
+	ctx.fill();
+	ctx.closePath();
+
+	ctx.beginPath();
+	ctx.globalAlpha = 0.5;
+	ctx.fillStyle = "rgb(0,255,255)";
+	ctx.moveTo(400,400);
+	ctx.arc(300,250,50,0,Math.PI*2, true);
+
+	ctx.moveTo(400,200);
+	ctx.arc(300,125,50,0,Math.PI*2, true);
+	ctx.fill();
+	ctx.closePath();
+
+	ctx.beginPath();
+	ctx.globalAlpha = 0.5;
+	ctx.fillStyle = "rgb(0,255,255)";
+	ctx.arc(602,602,50,0,Math.PI/2, false);
+	ctx.fill();
+	ctx.closePath();
+
+	ctx.beginPath();
+	ctx.globalAlpha = 0.5;
+	ctx.fillStyle = "rgb(0,255,255)";
+	ctx.arc(600,600,50,0,Math.PI/2, true);
+	ctx.fill();
+	ctx.closePath();
+
+	//ベジエ曲線
+	ctx.beginPath();
+	ctx.moveTo(400,110);
+	ctx.bezierCurveTo(420,80,420,115,400,130);
+
+	ctx.moveTo(400,110);
+	ctx.bezierCurveTo(380,80,380,115,400,130);
+	ctx.stroke();
+	ctx.closePath();
+
+</Script>
+</html>
