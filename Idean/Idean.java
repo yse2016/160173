@@ -2,13 +2,14 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.io.*;
-public class AlohaWindow{
+
+public class Idean{
 	public static void main(String[] args){
-		AlohaWindowMan awm = new AlohaWindowMan();
+		IdeaMan ia = new IdeaMan();
 	}
 }
 
-class AlohaWindowMan implements ActionListener{
+class IdeaMan implements ActionListener{
 	// field
 	JFrame frame;
 	JButton btnOpen;
@@ -20,25 +21,27 @@ class AlohaWindowMan implements ActionListener{
 	JScrollPane scrollPane;
 	String filedata;
 	String textdata;
-	int num = Math.floor( Math.random()*((6 + 1) - 0)) + min;
+	int max = 128;
+	String[] datas = new String[max];
+	int co = 0;
+	int num = 0;
 
-	// method
-	public AlohaWindowMan(){
+	public IdeaMan(){
 
-		frame = new JFrame("AlohaWindow");
+		frame = new JFrame("Idean");
 		frame.setLocation(500,250);
 		frame.setSize(500,500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		btnOpen = new JButton("Open data");
-		btnSave = new JButton("Save data");
+		btnOpen = new JButton("単語召喚");
+		btnSave = new JButton("メモ保存");
 
 		field = new JTextField(20);
 		area = new JTextArea(10,30);
 		area.setLineWrap(true);
 
 		panel = new JPanel();
-		panel.add(field);
+		// panel.add(field);
 		panel.add(btnOpen);
 		panel.add(btnSave);
 
@@ -49,7 +52,6 @@ class AlohaWindowMan implements ActionListener{
 		con.add(panel);
 		con.add(scrollPane);
 
-		// 表示させる。
 		frame.setVisible(true);
 
 		btnOpen.addActionListener(this);
@@ -57,39 +59,46 @@ class AlohaWindowMan implements ActionListener{
 
 		btnSave.addActionListener(this);
 		btnSave.setActionCommand("save");
-	}
-
-	public void actionPerformed(ActionEvent ae) {
-		String cmd = ae.getActionCommand();
-		if(cmd.equals("open")){
-			// field.setText("Open clicked");
-			filedata = field.getText();
-			try {
-				File inFile				= new File(filedata);
+		try{
+				File inFile			= new File("data.txt");
 				FileReader fr		= new FileReader(inFile);
 				BufferedReader br	= new BufferedReader(fr);
 
 				String line;
 				while((line = br.readLine()) != null){
-					area.append(line);
-					area.append("\n");
+					datas[co] = line;
+					co++;
 				}
+
+				br.close();
 			} catch(IOException e){
 					System.out.println("error");
 			}
+		}
+
+	public void actionPerformed(ActionEvent ae) {
+		String cmd = ae.getActionCommand();
+		if(cmd.equals("open")){
+			num = (int)(Math.random()*co);
+			area.setText(datas[num]);
+			// System.out.println(num);
+			area.append("\n");
+			num = (int)(Math.random()*co);
+			area.append(datas[num]);
+			// System.out.println(num);
 		}else if(cmd.equals("save")){
-			// field.setText("Save clicked");
-			filedata = field.getText();
 			textdata = area.getText();
-			try {
-				File outFile				= new File(filedata);
-				FileWriter fw				= new FileWriter(outFile);
-				BufferedWriter bw 			= new BufferedWriter(fw);
-				PrintWriter pw				= new PrintWriter(bw);
+			try{
+				File outFile			= new File("result.txt");
+				FileWriter fw			= new FileWriter(outFile,true);
+				BufferedWriter bw		= new BufferedWriter(fw);
+				PrintWriter pw			= new PrintWriter(bw);
 
 				pw.println(textdata);
 
-			} catch(IOException e){
+				pw.close();
+
+			}catch(IOException e){
 				System.out.println("error");
 			}
 		}
