@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset = "utf-8">
+	<title>createjs</title>
+</head>
+<body>
+	<h1>createjsの練習</h1>
+	<hr>
+
+	<canvas id="myCanvas" width="1000" height="1000"></canvas>
+
+	<script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+	<script>
+
+		window.addEventListener("load",init);
+
+		function init(){
+
+			// stageオブジェクトを作成
+			var stage = new createjs.Stage("myCanvas");
+
+			// shapeオブジェクト (図形のもとを作成)
+			var shikaku = new createjs.Shape();
+			var maru = new createjs.Shape();
+			var dango = new createjs.Shape();
+			var kado = new createjs.Shape();
+			var poly = new createjs.Shape();
+
+
+			// 四角形を描く
+			shikaku.graphics.beginFill("#00faa4");
+			shikaku.graphics.drawRect(215,220,75,75);
+
+			// 丸を描こう
+			maru.graphics.beginStroke("#fa00a4");
+			maru.graphics.setStrokeStyle(5);
+			maru.graphics.drawCircle(100,100,50);
+
+			// 色を変えて丸を描こうね。
+			dango.graphics.beginFill("#FF0000");
+			dango.graphics.drawCircle(250,50,50);
+
+			dango.graphics.beginFill("#00FF00");
+			dango.graphics.drawCircle(250,100,50);
+
+			dango.graphics.beginFill("#0000FF");
+			dango.graphics.drawCircle(250,150,50);
+
+			// 角丸四角形を描こうね
+			kado.graphics.beginFill("#afff00");
+			kado.graphics.drawRoundRect(205,300,100,100,15,15);
+
+			// 星書きましょう。
+			poly.graphics.beginStroke("#000000");
+			poly.graphics.drawPolyStar(100,300,75,6,0.5,90);
+			// poly.regX = 100;
+			// poly.regY = 300;
+
+			// shikaku.rotation = 0;
+			// shikaku.scaleX = 1.5;
+
+			// Stageに、addする
+
+			stage.addChild(shikaku);
+			stage.addChild(maru);
+			stage.addChild(dango);
+			stage.addChild(kado);
+			stage.addChild(poly);
+
+			// 表示する
+			createjs.Ticker.on("tick",function(){
+				poly.rotation += 1;
+				stage.update();
+			});
+
+		}
+
+	</script>
+</body>
+</html>
