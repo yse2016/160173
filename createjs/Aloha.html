@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset = "utf-8">
+	<title>Aloha</title>
+</head>
+<body>
+	<h1>Aloha--!</h1>
+	<hr>
+
+	<canvas id="Canvas" width="700" height="700"></canvas>
+
+	<script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+	<script>
+
+	// 表示の時に起動
+	window.addEventListener("load",init);
+
+	function init(){
+
+		// stage作成
+		var stage = new createjs.Stage("Canvas");
+
+		// shapeも作成
+		var poly = new createjs.Shape();
+		var xa = 1;
+		var ya = 1;
+
+		stage.setTransform(100,100);
+
+		poly.graphics.beginFill("#a0f000");
+		poly.graphics.drawPolyStar(100,100,50,5,0.5,-90);
+		poly.regX = 100;
+		poly.regY = 100;
+
+		// stageにshapeを置こう
+		stage.addChild(poly);
+
+		// stageの表示を更新しよか
+		createjs.Ticker.addEventListener("tick",handtick);
+			function handtick(){
+				poly.x += 10 * xa;
+				poly.y += 10 * ya;
+				if(poly.x > 500){
+					xa = -1;
+				}
+				if(poly.x < 0){
+					xa = 1;
+				}
+				if(poly.y > 200){
+					ya = -1;
+				}
+				if(poly.y < 0){
+					ya = 1;
+				}
+				/* if(a%2 == 1){
+					poly.x += -10;
+					if(poly.x == 0){
+						a++;
+					}
+				}
+				if(poly.y == 200){
+					if(poly.y >= 0){
+						poly.y += -10;
+					}
+				} */
+
+				poly.rotation += 10;
+				stage.update();
+		}
+	}
+	</script>
+</body>
+</html>
