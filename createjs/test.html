@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset ="utf-8">
+	<title>Test</title>
+</head>
+<body>
+	<h1>Ohayoooooo!!!!!</h1>
+	<hr>
+
+	<canvas id = "Canvas" width="700" height="700"></canvas>
+
+	<script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+	<script>
+
+	window.addEventListener("load",init);
+
+	function init(){
+
+		window.addEventListener("keydown",handleKeydown);
+
+		// Stage作成
+		var stage = new createjs.Stage("Canvas");
+
+		// shapeも作成
+		var shikaku = new createjs.Shape();
+		shikaku.addEventListener("click",handleClick);
+		shikaku.addEventListener("mouseover",handleMouseover);
+		shikaku.addEventListener("mouseout",handleMouseout);
+
+		var poly = new createjs.Shape();
+
+		var xa = 1;
+		var ya = 0;
+		var za = 1;
+
+
+		shikaku.graphics.beginFill("#ff0069");
+		shikaku.graphics.drawRect(0,0,50,50);
+		poly.graphics.beginFill("#ffff00");
+		poly.graphics.drawPolyStar(350,350,75,5,0.5,-90);
+
+		stage.enableMouseOver();
+		stage.addChild(shikaku);
+		stage.addChild(poly);
+
+		createjs.Ticker.addEventListener("tick", handtick);
+		function handtick(){
+
+			var mx = stage.mouseX;
+			var my = stage.mouseY;
+
+			shikaku.x = mx;
+			shikaku.y = my;
+			/* shikaku.x += 50 * xa;
+			if(shikaku.x > 600){
+				xa = -1;
+				ya = ya + za;
+				shikaku.y = ya * 50;
+			}else if(shikaku.x < 50){
+				xa = 1;
+				ya = ya + za;
+				shikaku.y = ya * 50;
+			}else if(shikaku.y > 600){
+				za = -1;
+			}else if(shikaku.y < 50){
+				za = 1;
+			}*/
+
+		var point = poly.globalToLocal(stage.mouseX,stage.mouseY);
+
+		var isHit = poly.hitTest(point.x,point.y);
+
+		if(isHit == true){
+			poly.graphics.clear()
+				.beginFill("#000000")
+				.drawPolyStar(350,350,75,5,0.5,-90);
+		} else {
+			poly.graphics.clear()
+				.beginFill("#ffff00")
+				.drawPolyStar(350,350,75,5,0.5,-90);
+		}
+
+			stage.update();
+		};
+
+		function handleClick(event){
+			//alert("クリックされたのです。");
+		};
+
+		function handleMouseover(event){
+			//alert("マウスオーバーしたのです。");
+			/* shikaku.graphics
+			.clear()
+			.beginFill("#ff6900")
+			.drawRect(0,0,50,50);*/
+		};
+
+		function handleMouseout(event){
+			/*shikaku.graphics
+			.clear()
+			.beginFill("#ff0069")
+			.drawRect(0,0,50,50);*/
+		}
+
+		function handleKeydown(event){
+			//var keyCode = event.keyCode;
+			//alert(" 押されたキーのコード"+ keyCode);
+		};
+	}
+
+	</script>
+
+</body>
+</html>
