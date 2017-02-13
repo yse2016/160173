@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Exam_createjs</title>
+</head>
+<body>
+
+	<h1></h1>
+	<hr>
+
+	<canvas id="Canvas" width="700" height="500"></canvas>
+
+	<script src = "https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+	<script>
+
+
+
+	window.addEventListener("load",timer);
+	window.addEventListener("load",init);
+
+	var setSecond = 50;
+	var timerID;
+
+	function timer(){
+		timerID = setInterval(function(){
+			if(setSecond > 0){
+				setSecond--;
+			}
+		},1000);
+	}
+
+	function init(){
+
+		//window.addEventListener();
+
+		var stage = new createjs.Stage("Canvas");
+
+		var maru = new createjs.Shape();
+		var maru2 = new createjs.Shape();
+		var maru3 = new createjs.Shape();
+		var maru4 = new createjs.Shape();
+		var poly = new createjs.Shape();
+
+		var t = new createjs.Text("100","20px sans-serif","blue");
+
+		// maru.addEventListener()
+
+		maru.graphics.beginFill("#000000");
+		maru.graphics.drawCircle(25,25,25);
+
+		maru2.graphics.beginFill("#000000");
+		maru2.graphics.drawCircle(60,20,40);
+
+		maru3.graphics.beginFill("#000000");
+		maru3.graphics.drawCircle(40,150,10);
+
+		maru4.graphics.beginFill("#000000");
+		maru4.graphics.drawCircle(400,80,25);
+
+		poly.graphics.beginFill("#00ffff");
+		poly.graphics.drawPolyStar(0,0,15,5,0.5,-90);
+
+		var xa = 1;
+		var ya = 1;
+		var xa2 = 1;
+		var ya2 = 1;
+		var xa3 = 1;
+		var ya3 = 1;
+		var xa4 = -1;
+		var ya4 = -1;
+		var mx = stage.mouseX;
+		var my = stage.mouseY;
+		// var s1 = 5;
+		// var s2 = 5;
+		// var s3 = 5;
+		// var s4 = 5;
+
+		var lean = 0;
+		var lean2 = 0;
+
+		var point;
+		var isHit;
+		var point2;
+		var isHit2;
+		var point3;
+		var isHit3;
+		var point4;
+		var isHit4;
+
+		stage.addChild(maru);
+		stage.addChild(maru2);
+		stage.addChild(maru3);
+		stage.addChild(maru4);
+		stage.addChild(poly);
+		stage.addChild(t);
+
+		createjs.Ticker.on("tick",function(){
+
+			t.text = String(setSecond);
+
+			if( lean == 0 ){
+				maru.x += 10 * xa;
+				maru.y += 10 * ya;
+				maru2.x += 5 * xa2;
+				maru2.y += 7.5 * ya2;
+				maru3.x += 20 * xa3;
+				maru3.y += 10 * ya3;
+				maru4.x += 10 * xa4;
+				maru4.y += 10 * ya4;
+
+				mx = stage.mouseX;
+				my = stage.mouseY;
+
+				poly.x = mx;
+				poly.y = my;
+
+				if(maru.x > 600){
+					xa = -1;
+				}
+				if(maru.x < 25){
+					xa = 1;
+				}
+				if(maru.y > 420){
+					ya = -1;
+				}
+				if(maru.y < 25 ){
+					ya = 1;
+				}
+
+				if(maru2.x > 600){
+					xa2 = -1;
+				}
+				if(maru2.x < 25){
+					xa2 = 1;
+				}
+				if(maru2.y > 400){
+					ya2 = -1;
+				}
+				if(maru2.y < 25 ){
+					ya2 = 1;
+				}
+
+				if(maru3.x > 600){
+					xa3 = -1;
+				}
+				if(maru3.x < 25){
+					xa3 = 1;
+				}
+				if(maru3.y > 300){
+					ya3 = -1;
+				}
+				if(maru3.y < -150){
+					ya3 = 1;
+				}
+
+				if(maru4.x > 200){
+					xa4 = -1;
+				}
+				if(maru4.x < -360){
+					xa4 = 1;
+				}
+				if(maru4.y > 300){
+					ya4 = -1;
+				}
+				if(maru4.y < 25){
+					ya4 = 1;
+				}
+
+				point = maru.globalToLocal(stage.mouseX, stage.mouseY);
+				isHit = maru.hitTest(point.x, point.y);
+
+				point2 = maru2.globalToLocal(stage.mouseX, stage.mouseY);
+				isHit2 = maru2.hitTest(point2.x, point2.y);
+
+				point3 = maru3.globalToLocal(stage.mouseX, stage.mouseY);
+				isHit3 = maru3.hitTest(point3.x, point3.y);
+
+				point4 = maru4.globalToLocal(stage.mouseX, stage.mouseY);
+				isHit4 = maru4.hitTest(point4.x, point4.y);
+			}
+
+			if(isHit == true){
+				lean = 1;
+				if(lean2 == 0){
+					window.alert("GameOver");
+					lean2 = 1;
+				}
+			}
+
+			if(isHit2 == true){
+				lean = 1;
+				if(lean2 == 0){
+					window.alert("GameOver");
+					lean2 = 1;
+				}
+			}
+
+			if(isHit3 == true){
+				lean = 1;
+				if(lean2 == 0){
+					window.alert("GameOver");
+					lean2 = 1;
+				}
+			}
+
+			if(isHit4 == true){
+				lean = 1;
+				if(lean2 == 0){
+					window.alert("GameOver");
+					lean2 = 1;
+				}
+			}
+
+			if(setSecond <= 0){
+				lean = 1;
+				if(lean2 == 0){
+					window.alert("GameClear!");
+					lean2 = 1;
+				}
+			}
+
+			stage.update();
+		})
+
+	}
+	</script>
+
+</body>
+</html>

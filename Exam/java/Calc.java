@@ -2,13 +2,13 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class Exam{
+public class Calc{
 	public static void main(String[] args){
-		ExamMan em = new ExamMan();
+		CalcMan cm = new CalcMan();
 	}
 }
 
-class ExamMan implements ActionListener{
+class CalcMan implements ActionListener{
 	// field
 	JFrame frame;
 	JButton add;
@@ -46,9 +46,9 @@ class ExamMan implements ActionListener{
 	String res2;
 	String en = "";
 
-	public ExamMan(){
+	public CalcMan(){
 
-		frame = new JFrame("Exam");
+		frame = new JFrame("Calc");
 		frame.setLocation(500,250);
 		frame.setSize(300,300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
